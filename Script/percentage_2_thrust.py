@@ -65,6 +65,7 @@ class Percentage2Thrust:
 
             else:
                 thrust = 0
+
             self.THRUSTs.append(thrust)
         self.thruster_thrust_to_axe_thrust(self.THRUSTs)
 
