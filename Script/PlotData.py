@@ -17,52 +17,57 @@ class PlotData:
 
     def __init__(self):
 
-        self.speed_15 = ManageData('speed_y_15.mat', 'SPEED', 0)
-        self.speed_20 = ManageData('speed_y_20.mat', 'SPEED', 0)
-        self.speed_25 = ManageData('speed_y_25.mat', 'SPEED', 0)
+        self.speed_1 = ManageData('x_10_3.mat', 'LINEAR_SPEED', 0)
+        self.speed_2 = ManageData('x_20_1.mat', 'LINEAR_SPEED', 0)
+        self.speed_3 = ManageData('x_25_1.mat', 'LINEAR_SPEED', 0)
+        self.speed_4 = ManageData('x_30_1.mat', 'LINEAR_SPEED', 0)
 
-        self.thrust_15 = ManageData('thrust_y_15.mat', 'SPEED', 0)
-        self.thrust_20 = ManageData('thrust_y_20.mat', 'SPEED', 0)
-        self.thrust_25 = ManageData('thrust_y_25.mat', 'SPEED', 0)
+        self.thrust_1 = ManageData('x_10_2.mat', 'Thrust', 0)
+        self.thrust_2 = ManageData('x_20_2.mat', 'Thrust', 0)
+        self.thrust_3 = ManageData('x_25_3.mat', 'Thrust', 0)
+        self.thrust_4 = ManageData('x_30_1.mat', 'Thrust', 0)
 
         self.data_filter()
 
-        self.thrust_15_rescale = self.rescale_data(self.thrust_15.data, len(self.thrust_15.data) / len(self.speed_15.data))
-        self.thrust_20_rescale = self.rescale_data(self.thrust_20.data, len(self.thrust_20.data) / len(self.speed_20.data))
-        self.thrust_25_rescale = self.rescale_data(self.thrust_25.data, len(self.thrust_25.data) / len(self.speed_25.data))
+        self.thrust_1_rescale = self.rescale_data(self.thrust_1.data, len(self.thrust_1.data) / len(self.speed_1.data))
+        self.thrust_2_rescale = self.rescale_data(self.thrust_2.data, len(self.thrust_2.data) / len(self.speed_2.data))
+        self.thrust_3_rescale = self.rescale_data(self.thrust_3.data, len(self.thrust_3.data) / len(self.speed_3.data))
+        self.thrust_4_rescale = self.rescale_data(self.thrust_4.data, len(self.thrust_4.data) / len(self.speed_4.data))
 
-        thrust_15, speed_15 = self.set_data(self.thrust_15_rescale, self.speed_15.data)
-        thrust_20, speed_20 = self.set_data(self.thrust_20_rescale, self.speed_20.data)
-        thrust_25, speed_25 = self.set_data(self.thrust_25_rescale, self.speed_25.data)
+        thrust_1, speed_1 = self.thrust_1_rescale, self.speed_1.data
+        thrust_2, speed_2 = self.thrust_2_rescale, self.speed_2.data
+        thrust_3, speed_3 = self.thrust_3_rescale, self.speed_3.data
+        thrust_4, speed_4 = self.thrust_4_rescale, self.speed_4.data
 
-        self.x_speed_15 = self.set_x_axis(len(speed_15))
-        self.x_speed_20 = self.set_x_axis(len(speed_20))
-        self.x_speed_25 = self.set_x_axis(len(speed_25))
+        self.x_speed_1 = self.set_x_axis(len(speed_1))
+        self.x_speed_2 = self.set_x_axis(len(speed_2))
+        self.x_speed_3 = self.set_x_axis(len(speed_3))
+        self.x_speed_4 = self.set_x_axis(len(speed_4))
 
-        self.x_thrust_15 = self.set_x_axis(len(thrust_15))
-        self.x_thrust_20 = self.set_x_axis(len(thrust_20))
-        self.x_thrust_25 = self.set_x_axis(len(thrust_25))
+        self.x_thrust_1 = self.set_x_axis(len(thrust_1))
+        self.x_thrust_2 = self.set_x_axis(len(thrust_2))
+        self.x_thrust_3 = self.set_x_axis(len(thrust_3))
+        self.x_thrust_4 = self.set_x_axis(len(thrust_4))
 
-        self.plot_data(self.x_speed_15, speed_15, 'Y Speed 15% with thrust')
-        self.plot_data(self.x_thrust_15, thrust_15, 'Thrust 15%')
-        plt.show()
-        self.plot_data(self.x_speed_20, speed_20, 'Y Speed 20% with thrust')
-        self.plot_data(self.x_thrust_20, thrust_20, 'Thrust 20%')
-        plt.show()
-        self.plot_data(self.x_speed_25, speed_25, 'Y Speed 25% with thrust')
-        self.plot_data(self.x_thrust_25, thrust_25, 'Thrust 25%')
+        self.plot_data(self.x_speed_1, speed_1, 'x Speed with 10% thrust')
+        #self.plot_data(self.x_thrust_1, thrust_1, 'Thrust 10%')
+        #plt.show()
+        self.plot_data(self.x_speed_2, speed_2, 'x Speed with 20% thrust')
+        #self.plot_data(self.x_thrust_2, thrust_2, 'Thrust 25%')
+        #plt.show()
+        self.plot_data(self.x_speed_3, speed_3, 'x Speed with 25% thrust')
+        #self.plot_data(self.x_thrust_3, thrust_3, 'Thrust 25%')
+        #plt.show()
+        self.plot_data(self.x_speed_4, speed_4, 'x Speed with 30% thrust')
+        #self.plot_data(self.x_thrust_4, thrust_4, 'Thrust 30%')
         plt.show()
         
-        self.save_data('SPEED', speed_15, 'speed_y_rescale_15.mat')
-        self.save_data('SPEED', speed_20, 'speed_y_rescale_20.mat')
-        self.save_data('SPEED', speed_25, 'speed_y_rescale_25.mat')
+        #self.save_data(thrust_1, speed_1, 'x_rescale_10_1.mat')
+        #self.save_data(thrust_2, speed_2, 'x_rescale_10_2.mat')
+        #self.save_data(thrust_3, speed_3, 'x_rescale_10_3.mat')
 
-        self.save_data('THRUST', thrust_15, 'thrust_y_rescale_15.mat')
-        self.save_data('THRUST', thrust_20, 'thrust_y_rescale_20.mat')
-        self.save_data('THRUST', thrust_25, 'thrust_y_rescale_25.mat')
-
-    def save_data(self, Key, data, file_name):
-        dic = {Key: data}
+    def save_data(self, thrust, speed, file_name):
+        dic = {'Thrust': thrust, 'LINEAR_SPEED': speed}
         io.savemat(file_name, dic)
 
     def plot_data(self, x, y, label):
@@ -70,13 +75,15 @@ class PlotData:
         plt.legend(bbox_to_anchor=(1, 1), loc=2, borderaxespad=0.)
 
     def data_filter(self):
-        self.speed_15.filter_data()
-        self.speed_20.filter_data()
-        self.speed_25.filter_data()
+        self.speed_1.filter_data()
+        self.speed_2.filter_data()
+        self.speed_3.filter_data()
+        self.speed_4.filter_data()
 
-        self.thrust_15.filter_data()
-        self.thrust_20.filter_data()
-        self.thrust_25.filter_data()
+        self.thrust_1.filter_data()
+        self.thrust_2.filter_data()
+        self.thrust_3.filter_data()
+        self.thrust_4.filter_data()
 
     def rescale_data(self, data, skip):
         j, new_data = skip, []
