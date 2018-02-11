@@ -1,8 +1,7 @@
 import os
 import argparse
-import tqdm
 
-
+from tqdm import tqdm
 from shutil import copyfile
 
 """ 
@@ -12,7 +11,7 @@ a better dataset with less similar images.
 """
 
 
-def parse_args(self):
+def parse_args():
     """
     Parse script arguments.
     :return: parsed args
@@ -24,7 +23,7 @@ def parse_args(self):
     parser.add_argument('-o', '--output_dir', required=True,
                         help='Output directory')
     parser.add_argument('-c', '--skip_count', required=True,
-                        help='how many images will be skipped between copy')
+                        type=int, help='how many images will be skipped between copy')
 
     return parser.parse_args()
 
@@ -44,6 +43,10 @@ def process_copy_with_progress(source_path, dest_path, skip_count):
     :param dest_path:  Destination file path
     :param skip_count: Modulo count of to skip files
     """
+
+    if not os.path.exists(dest_path):
+        os.makedirs(dest_path)
+
     # Preprocess the total files count
     file_counter = 0
     for file_path in walk_dir(source_path):
