@@ -31,7 +31,10 @@ def main():
     bag_file_list = args.bag_file.split()
 
     for bag_file in bag_file_list:
-        print "Extract images from %s on topic %s" % (bag_file, args.image_topic)
+        msg = 'Extract images from {} on topic {}'.\
+              format(bag_file=bag_file,topic=args.image_topic)
+        print(msg)
+        
         bag = rosbag.Bag(bag_file, "r")
         bridge = CvBridge()
         for topic, msg, t in bag.read_messages(topics=[args.image_topic]):
