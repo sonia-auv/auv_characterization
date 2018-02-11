@@ -13,7 +13,7 @@ import cv2
 import rosbag
 from cv_bridge import CvBridge
 
-IMAGE_TOPIC_DEFAULT = '/provider_vision/Front_GigE'
+IMAGE_TOPIC_DEFAULT = '/provider_vision/Front_GigE/compressed'
 OUTPUT_FOLDER_DEFAULT = os.path.join(os.getcwd(), 'extraction')
 
 
@@ -45,7 +45,6 @@ def main():
     """
     Extract a folder of images from a rosbag.
     """
-    bridge = CvBridge()
 
     args = parse_args()
 
@@ -63,14 +62,17 @@ def main():
         bag_path = os.path.join(args.source_bag_dir, bag_file)
 
         with rosbag.Bag(bag_path, "r") as bag:
+
             for topic, msg, _ in bag.read_messages(topics=[args.image_topic]):
 
 
                 img_name = "frame_{}.jpg".format(generate_uuid1_name())
 
-                extraction_path = os.join(args.output_dir, img_name)
+                extraction_path = os.path.join(args.output_dir, img_name)
 
-                cv_img = bridge.imgmsg_to_cv2(msg, desired_encoding='passthrough')
+                bridge = CvBridge()
+
+                cv_img = bridge.compressed_imgmsg_to_cv2(msg, desired_encoding='passthrough')
                 cv2.imwrite(extraction_path, cv_img)
 
 
