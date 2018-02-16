@@ -1,4 +1,6 @@
 import numpy as np
+import time
+from scipy import io
 
 
 class DynamicModel:
@@ -35,6 +37,10 @@ class DynamicModel:
         self.gravity_vector = None
         # T
         self.thrust = None
+        # speed_i-1
+        self.last_speed = 0.0
+        # time
+        self.last_time = time.clock()
 
         self.set_added_mass_matrix()
         self.set_body_mass_inertia_matrix()
@@ -98,10 +104,13 @@ class DynamicModel:
     def compute_dynamic_model(self, orientation, speed):
         self.set_damping_matrix(speed)
         self.set_gravity_vector(orientation)
-        acc = 0.0
+        delta_time = time.clock() - self.last_time
+        acc = (speed - self.last_speed) / delta_time
         self.thrust = self.mass_matrix * acc + self.damping_matrix + self.gravity_vector
+        self.last_speed, self.last_time = speed, time.clock()
 
 
+if __name__ == '__main__':
 
     
 

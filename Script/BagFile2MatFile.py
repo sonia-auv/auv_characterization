@@ -3,7 +3,6 @@
 import struct
 import rosbag
 import argparse
-import numpy as np
 
 from scipy import io
 
@@ -16,6 +15,7 @@ def parse_arguments():
     parser.add_argument('--BagName', dest='bag_name')
     parser.add_argument('--command', dest='command')
     parser.add_argument('--outName', dest='output_name')
+    parser.add_argument('--topic', dest='topic_name')
     parser.add_argument('--axis', dest='axis')
 
     return parser.parse_args()
