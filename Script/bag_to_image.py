@@ -16,7 +16,7 @@ import cv2
 import rosbag
 from cv_bridge import CvBridge
 
-#TODO: CREATE DOC FOR THIS MODULES (COMMAND EXAMPLE)
+# TODO: CREATE DOC FOR THIS MODULES (COMMAND EXAMPLE)
 
 IMAGE_TOPIC_DEFAULT = '/provider_vision/Front_GigE/compressed'
 OUTPUT_FOLDER_DEFAULT = os.path.join(os.getcwd(), 'extraction')
@@ -34,7 +34,6 @@ def set_logger(log_level=logging.INFO):
     return logger
 
 
-
 def parse_args():
     """
     Parse script arguments.
@@ -50,6 +49,7 @@ def parse_args():
                         help="Output directory")
 
     return parser.parse_args()
+
 
 def generate_uuid1_name():
     """
@@ -74,17 +74,6 @@ def main(logger):
     bridge = CvBridge()
 
     for bag_file in bag_file_list:
-<<<<<<< HEAD
-        print "Extract images from %s on topic %s" % (bag_file, args.image_topic)
-        bag = rosbag.Bag(bag_file, "r")
-        bridge = CvBridge()
-        for topic, msg, t in bag.read_messages(topics=[args.image_topic]):
-            pic_name = "frame" + generate_uuid1_name() + ".jpg"
-            cv_img = bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="passthrough")
-            cv2.imwrite(pic_name, cv_img)
-    return
-=======
-
 
         template_msg = 'Extract images from {} on topic {}'
         msg = template_msg.format(bag_file, args.image_topic)
@@ -102,7 +91,6 @@ def main(logger):
                 cv_img = bridge.compressed_imgmsg_to_cv2(msg, desired_encoding='passthrough')
                 cv2.imwrite(extraction_path, cv_img)
                 logger.info('Extracted image {} to {}'.format(img_name, extraction_path))
->>>>>>> 02fcd6fa6911b0fef8b62015259b22842cb3d92f
 
 
 if __name__ == '__main__':
