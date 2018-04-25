@@ -62,9 +62,12 @@ def main(logger):
 
     types = ('*.mp4', '*.MP4', '*.avi', '*.AVI')  # the tuple of file types
     video_files = []
-    for files in types:
-        video_files.extend(glob(files))
+    for file_type in types:
+        files = glob(os.path.join(args.source_video_dir, file_type))
+        video_files.extend(files)
 
+    import IPython
+    IPython.embed()
     if not os.path.exists(args.output_dir):
         os.makedirs(args.output_dir)
 
