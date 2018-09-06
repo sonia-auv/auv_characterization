@@ -7,7 +7,7 @@ x12 = ParseData('/home/olavoie/Workspaces/ros_sonia_ws/src/auv_characterization/
 data1      = [x11, x12];
 speed1     = filter(b,1, data1);
 thrust1    = zeros(1, length(speed1));
-thrust1(:) = 1.155118584632874;
+thrust1(:) = 18.9761;
 
 x21 = ParseData('/home/olavoie/Workspaces/ros_sonia_ws/src/auv_characterization/Matlab/Data/Test 9 Décembre/Numerical data/x_25_1.mat', 0.2,1); 
 x22 = ParseData('/home/olavoie/Workspaces/ros_sonia_ws/src/auv_characterization/Matlab/Data/Test 9 Décembre/Numerical data/x_25_2.mat', 0.2,1); 
@@ -16,7 +16,7 @@ x23 = ParseData('/home/olavoie/Workspaces/ros_sonia_ws/src/auv_characterization/
 data2      = [x21, x22, x23];
 speed2     = filter(b, 1, data2);
 thrust2    = zeros(1, length(data2));
-thrust2(:) = 3.138251304626465;
+thrust2(:) = 49.3131;
 
 speed  = [speed1, speed2];
 thrust = [thrust1, thrust2];

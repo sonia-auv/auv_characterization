@@ -11,7 +11,6 @@ import uuid
 import os
 import logging
 import sys
-import tqdm
 import cv2
 import rosbag
 from cv_bridge import CvBridge
@@ -81,16 +80,19 @@ def main(logger):
         logger.info(msg)
 
         bag_path = os.path.join(args.source_bag_dir, bag_file)
-
+        i = 0
         with rosbag.Bag(bag_path, "r") as bag:
             for topic, msg, _ in bag.read_messages(topics=[args.image_topic]):
 
-                img_name = "frame_{}.jpg".format(generate_uuid1_name())
-                extraction_path = os.path.join(args.output_dir, img_name)
+                if i >= 6:
+                    img_name = "frame_{}.jpg".format(generate_uuid1_name())
+                    extraction_path = os.path.join(args.output_dir, img_name)
 
-                cv_img = bridge.compressed_imgmsg_to_cv2(msg, desired_encoding='passthrough')
-                cv2.imwrite(extraction_path, cv_img)
-                logger.info('Extracted image {} to {}'.format(img_name, extraction_path))
+                    cv_img = bridge.compressed_imgmsg_to_cv2(msg, desired_encoding='passthrough')
+                    cv2.imwrite(extraction_path, cv_img)
+                    logger.info('Extracted image {} to {}'.format(img_name, extraction_path))
+                    i = 0
+                i += 1
 
 
 if __name__ == '__main__':

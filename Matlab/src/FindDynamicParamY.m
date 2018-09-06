@@ -7,21 +7,21 @@ x12 = ParseData('/home/olavoie/Workspaces/ros_sonia_ws/src/auv_characterization/
 data1      = [x11, x12];
 speed1     = filter(b,1, data1);
 thrust1    = zeros(1, length(speed1));
-thrust1(:) = 1.155118584632874;
+thrust1(:) = 18.9761;
 
 x02 = ParseData('/home/olavoie/Workspaces/ros_sonia_ws/src/auv_characterization/Matlab/Data/Test 9 Décembre/Numerical data/y_15_1.mat', 0.13,10,2);
 
 data0      = [x02];
 speed0     = filter(b, 1, data0);
 thrust0    = zeros(1, length(data0));
-thrust0(:) = 1.772558331489563;
+thrust0(:) = 29.0884;
 
 x21 = ParseData('/home/olavoie/Workspaces/ros_sonia_ws/src/auv_characterization/Matlab/Data/Test 9 Décembre/Numerical data/y_25_1.mat', 0.23,10,2); 
 
 data2      = [x21];
 speed2     = filter(b, 1, data2);
 thrust2    = zeros(1, length(data2));
-thrust2(:) = 3.138251304626465;
+thrust2(:) = 49.3131;
 
 x31 = ParseData('/home/olavoie/Workspaces/ros_sonia_ws/src/auv_characterization/Matlab/Data/Test 9 Décembre/Numerical data/y_30_1.mat', 0.28,10,2);
 x32 = ParseData('/home/olavoie/Workspaces/ros_sonia_ws/src/auv_characterization/Matlab/Data/Test 9 Décembre/Numerical data/y_30_2.mat', 0.28,10,2);
